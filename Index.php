@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Syntax</title>
+    <?php  include "./assets/bootstrap.php" ?>
     <style>
         .h2{
             color: red;
@@ -13,52 +14,28 @@
     </style>
 </head>
 <?php
-  //require_once "./connections/db.php";
+  require_once "./connections/db.php";
 ?>
 <body>
-    <form action="" method="GET">
-        <input type="text" name="name1" id="name1">
-        <input type="submit" value="Test">
-    </form>
+    <?php  include_once "./navbar.php" ?>
+   <div class="container">
     <?php
-        $value="global variable";
-        $name="Dara";
 
-        function counter(){
-           static $count=0;
-            $count++;
-            echo $count ."<br/>";
-        }
-
-        function display(){
-            ///local $value;
-            $value1="local varible";
-            $GLOBALS['value']="new global variable";
-            echo $value1;
-        }
-
-        display();
-        echo $value;
-        echo "<pre>";
-            print_r($GLOBALS);
-            echo "<hr/>";
-            print_r($_SERVER);
-            echo "<hr/>";
-            print_r($_GET);
-            echo "<hr/>";
-            print_r($_POST);
-            echo "<hr/>";
-            print_r($_REQUEST);
-        echo "</pre>";
-
-
-        counter();//1
-        counter();//2
-        counter();//3
-        counter();//4
-        counter();//5
-
+      $sql="SELECT * FROM Product;";
+     if($query=$conn->query($sql)):
+        while($row=$query->fetch()):
     ?>
-   
+        <div class="row">
+            <h3 class="text-danger"><?=  $row[1]  ?></h3>
+            <div>
+                <img src="./images/<?= $row[3]  ?>" alt="no-image" 
+                     style="width:100px;height:100px;" />
+            </div>
+            
+        </div>
+
+        <?php endwhile; ?>
+    <?php endif; ?>
+    </div>
 </body>
 </html>
