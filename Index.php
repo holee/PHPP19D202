@@ -25,45 +25,26 @@
 
             $sql="SELECT * FROM Product;";
             if($query=$conn->query($sql)):
-            while($row=$query->fetch()):
+            while($row=$query->fetch(PDO::FETCH_NUM)):
             ?>
             <div class="row">
-                <h3 class="text-danger"><?=  $row[1]  ?></h3>
+                <a href="./Order.php?id=<?php echo $row[0]  ?>">
+                    <h3 class="text-danger"><?=  $row[1]  ?></h3>
+                </a>
                 <div>
-                    <img src="./images/<?= $row[3]  ?>" alt="no-image" 
+                <a href="./Order.php?id=<?php echo $row[0]  ?>">
+                    <img src="./practice/images/Products/Thumbnails/<?= $row[3]  ?>" alt="no-image" 
                         style="width:100px;height:100px;" />
+                </a>
                 </div>
-                
+                <div>
+                    <p><?php echo $row[4]  ?></p>
+                </div>
             </div>
 
             <?php endwhile; ?>
             <?php endif; ?>
         </div>
-        <div class="col-6">
-        <?php
-        $sql1="SELECT * FROM Product;";
-        if($query=$conn->query($sql1)):
-            $rows=$query->fetchAll(PDO::FETCH_NUM);
-
-            echo "<pre>";
-                print_r($rows);
-            echo "</pre>";
-
-            foreach($rows as $row):
-        ?>
-        <div class="row">
-            <h3 class="text-danger"><?=  $row[1]  ?></h3>
-            <div>
-                <img src="./images/<?= $row[3]  ?>" alt="no-image" 
-                    style="width:100px;height:100px;" />
-            </div>
-            <strong>Price:<?php echo $row[2]  ?>$</strong>
-        </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-                </div>
-            </div>
-  
     </div>
 </body>
 </html>
